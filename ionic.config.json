@@ -1,0 +1,7 @@
+{
+  "name": "Home4Students",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
