@@ -1,0 +1,23 @@
+.splash-content {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  height: 100vh; /* Ocupar toda la pantalla */
+  background-color: #f8f8f8; /* Fondo neutro */
+}
+
+.splash-container {
+  text-align: center; /* Centrar el texto e ícono */
+}
+
+.splash-container ion-icon {
+  font-size: 80px; /* Ajustar tamaño del icono */
+  color: #2c3e50; /* Color oscuro elegante */
+}
+
+.splash-container h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-top: 10px;
+}
