@@ -52,4 +52,12 @@ export class DetallePage implements OnInit {
   handleImageError() {
     console.error('Error: La imagen no se pudo cargar:', this.propiedad.imagenes[this.imagenActualIndex]);
   }
+
+  rentar() {
+    this.navCtrl.navigateForward('/contrato');
+  }
+
+  visita() {
+    this.navCtrl.navigateForward('/solicitarvisita');
+  }
 }

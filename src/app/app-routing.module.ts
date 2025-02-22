@@ -22,6 +22,22 @@ const routes: Routes = [
     path: 'detalle',
     loadChildren: () => import('./detalle/detalle.module').then( m => m.DetallePageModule)
   },
+  {
+    path: 'contrato',
+    loadChildren: () => import('./contrato/contrato.module').then( m => m.ContratoPageModule)
+  },
+  {
+    path: 'validar-identidad',
+    loadChildren: () => import('./validar-identidad/validar-identidad.module').then( m => m.ValidarIdentidadPageModule)
+  },
+  {
+    path: 'metododepago',
+    loadChildren: () => import('./metododepago/metododepago.module').then( m => m.MetododepagoPageModule)
+  },
+  {
+    path: 'solicitarvisita',
+    loadChildren: () => import('./solicitarvisita/solicitarvisita.module').then( m => m.SolicitarvisitaPageModule)
+  },
 ];
 
 
