@@ -9,29 +9,28 @@
       <ion-card-content>
         <ion-item>
           <ion-icon name="person-outline" slot="start"></ion-icon>
-          <ion-input placeholder="Usuario"></ion-input>
+          <ion-input [(ngModel)]="user" placeholder="Usuario"></ion-input>
         </ion-item>
-
+        
         <ion-item>
           <ion-icon name="mail-outline" slot="start"></ion-icon>
-          <ion-input type="email" placeholder="Correo"></ion-input>
+          <ion-input [(ngModel)]="email" placeholder="Correo"></ion-input>
         </ion-item>
-
+        
         <ion-item>
           <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
-          <ion-input type="password" placeholder="Contraseña"></ion-input>
+          <ion-input [(ngModel)]="password" type="password" placeholder="Contraseña"></ion-input>
         </ion-item>
-
+        
         <ion-item>
           <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
-          <ion-input type="password" placeholder="Repetir Contraseña"></ion-input>
+          <ion-input [(ngModel)]="confirmPassword" type="password" placeholder="Confirmar contraseña"></ion-input>
         </ion-item>
-
+        
         <ion-item>
-          <ion-icon name="people-outline" slot="start"></ion-icon>
-          <ion-select [(ngModel)]="userType" placeholder="Seleccionar Rol">
-            <ion-select-option value="student">Estudiante</ion-select-option>
-            <ion-select-option value="landlord">Arrendatario</ion-select-option>
+          <ion-select [(ngModel)]="userType" placeholder="Seleccionar rol">
+            <ion-select-option value="propietario">Propietario</ion-select-option>
+            <ion-select-option value="quiero-rentar">Quiero rentar (Estudiante)</ion-select-option>
           </ion-select>
         </ion-item>
 

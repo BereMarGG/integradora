@@ -9,31 +9,36 @@ import { NavController } from '@ionic/angular';
   standalone: false
 })
 export class SearchPage implements OnInit {
-
   filtroTipo: string = '';
   filtroUniversidad: string = '';
   filtroPrecio: number[] = [2000, 10000];
 
-  propiedades = [
-    { tipo: 'casa', precio: 5000, universidad: 'uaq', distancia: 2.5, imagen: 'assets/image.png' },
-    { tipo: 'departamento', precio: 7000, universidad: 'itq', distancia: 3.0, imagen: 'assets/image.png' },
-    { tipo: 'cuarto', precio: 3000, universidad: 'uvm', distancia: 1.2, imagen: 'assets/image.png' },
-    { tipo: 'casa', precio: 6000, universidad: 'uteq', distancia: 4.0, imagen: 'assets/image.png' }
-  ];
+  propiedades: any[] = []; // Se inicializa vacío
 
   constructor(private navCtrl: NavController) {}
 
+  ngOnInit() {
+    this.cargarPropiedades();
+  }
+
+  cargarPropiedades() {
+    const savedProperties = JSON.parse(localStorage.getItem('properties') || '[]');
+    this.propiedades = savedProperties.map((p: any) => ({
+      tipo: p.tipo,
+      precio: p.especificaciones_adicionales.includes('precio') ? parseInt(p.especificaciones_adicionales.split(':')[1]) : 5000, // Si hay precio en especificaciones, úsalo
+      universidad: 'Desconocida', // Puedes agregar un campo para universidad en PropertyUploadPage si es necesario
+      distancia: Math.random() * 10, // Puedes ajustar esto
+      imagen: 'assets/casa.png' // Usa una imagen por defecto o permite que el usuario suba una
+    }));
+  }
+
   verDetalle(propiedad: any) {
     this.navCtrl.navigateForward(['/detalle'], { state: { propiedad } });
-  }  
-
-  ngOnInit() {
   }
 
   aplicarFiltros() {
     return this.propiedades.filter(p =>
       (!this.filtroTipo || p.tipo === this.filtroTipo) &&
-      (!this.filtroUniversidad || p.universidad === this.filtroUniversidad) &&
       p.precio >= this.filtroPrecio[0] && p.precio <= this.filtroPrecio[1]
     );
   }

@@ -5,6 +5,18 @@
         <ion-icon name="home" size="large"></ion-icon>
         <h1>Subir imágenes de la propiedad</h1>
 
+        <h2>Subir Imágenes</h2>
+        <ion-item>
+          <ion-label>Seleccionar imágenes:</ion-label>
+          <input type="file" (change)="onImageSelected($event)" multiple accept="image/*">
+        </ion-item>
+
+        <div class="image-preview-container">
+          <div *ngFor="let img of propertyImages" class="image-preview">
+            <img [src]="img" alt="Imagen subida">
+          </div>
+        </div>
+
         <ion-item>
           <ion-label>Tipo:</ion-label>
           <ion-radio-group [(ngModel)]="propertyType">

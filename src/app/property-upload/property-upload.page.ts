@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -20,11 +20,25 @@ export class PropertyUploadPage {
   ineSelected: boolean = false;
   passportSelected: boolean = false;
   documentPreview: string | ArrayBuffer | null = null;
-  additionalSpecs: string = '';  // 🔹 Agrega esta línea
+  additionalSpecs: string = '';
+  propertyImages: string[] = []; // Para almacenar imágenes subidas
 
   constructor(private navCtrl: NavController) {}
 
   onFileSelected(event: any) {
+    const files = event.target.files;
+    if (files) {
+      for (let file of files) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.propertyImages.push(reader.result as string);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  }
+
+  onDocumentSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -35,13 +49,26 @@ export class PropertyUploadPage {
     }
   }
 
+  onImageSelected(event: any) {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      for (let file of files) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.propertyImages.push(reader.result as string);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  }  
+
   publish() {
-    console.log('Propiedad publicada:', {
+    const propertyData = {
       tipo: this.propertyType,
       habitaciones: this.rooms,
       baños: this.bathrooms,
       estacionamiento: this.parking,
-      especificaciones_adicionales: this.additionalSpecs, // 🔹 Incluye en la salida
+      especificaciones_adicionales: this.additionalSpecs,
       servicios: {
         agua: this.water,
         luz: this.electricity,
@@ -52,8 +79,16 @@ export class PropertyUploadPage {
         ine: this.ineSelected,
         pasaporte: this.passportSelected
       },
-      documento: this.documentPreview
-    });
+      documento: this.documentPreview,
+      imagenes: this.propertyImages // Guardar imágenes
+    };
+  
+    const savedProperties = JSON.parse(localStorage.getItem('properties') || '[]');
+    savedProperties.push(propertyData);
+    localStorage.setItem('properties', JSON.stringify(savedProperties));
+  
+    console.log('Propiedad publicada:', propertyData);
     this.navCtrl.navigateForward('/property-confirmation');
   }
+  
 }
